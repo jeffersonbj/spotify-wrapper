@@ -1,10 +1,14 @@
 {
-  "name": "tdd-js-estudos",
+  "name": "spotify-wrapper",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A wrapper to work with the Spotify Web API.",
+  "main": "src/index.js",
   "scripts": {
-    "lint":"./node_modules/.bin/eslint src/*.js",
+    "clear": "rimraf lib",
+    "prebuild":"./node_modules/.bin/babel --out-dir lib src",
+    "build": "npm run clear && npm run prebuild",
+    "build:watch": "npm run clear && npm run prebuild -- --watch",
+    "lint": "./node_modules/.bin/eslint src/*.js",
     "test": "./node_modules/.bin/mocha tests/**/*.spec.js --require babel-register",
     "test:tdd": "./node_modules/.bin/mocha tests/**/*.spec.js  --require babel-register --watch",
     "test:coverage": "nyc npm test"
@@ -13,19 +17,30 @@
     "functions": 80,
     "lines": 80,
     "check-coverage": true,
-    "reporter": ["text", "html"],
-    "exclude": ["tests/**"]
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "exclude": [
+      "tests/**"
+    ]
   },
   "keywords": [],
   "author": "Jefferson B. de Jesus <jeffersonbj@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0",
-    "nyc": "^12.0.2"
+    "node-fetch": "^2.1.2",
+    "nyc": "^12.0.2",
+    "rimraf": "^2.6.2",
+    "sinon": "^2.1.0",
+    "sinon-chai": "^3.0.0",
+    "sinon-stub-promise": "^4.0.0"
   },
   "dependencies": {
     "chai": "^4.1.2",
