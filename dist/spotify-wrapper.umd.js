@@ -86,7 +86,15 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var TOKEN_API = 'BQAyOUlIcYDkJibVpEUeEyad_SAlSjVaLE98qTAqcb93rfnSilMnTnf_HdT94LB_5Fct_1xVgz2IK0zIpT5gENjmj3bpdFIFO8AYbu3zbwqkRvg4mqZz2fASsBclrKDx4v28sHCz44aEWOOJS2yeTFT4dYwMyDCMUIwZEqsN_ghH866sDrlhz1ZbRVj4VaS5XptT1mylsEEgrdjEuFI_-Opln4PeILllQy7-P1__eUyYWLKwNLI5GDBl7cGXklgX6INayt7G1mwh4A';
+
 var API_URL = exports.API_URL = 'https://api.spotify.com/v1';
+
+var HEADERS = exports.HEADERS = {
+  headers: {
+    Authorization: '\'Bearer ' + TOKEN_API + '\''
+  }
+};
 
 /***/ }),
 /* 1 */
@@ -119,15 +127,15 @@ var _config = __webpack_require__(0);
 var _utils = __webpack_require__(1);
 
 var getAlbum = exports.getAlbum = function getAlbum(id) {
-  return fetch(_config.API_URL + '/albums/' + id).then(_utils.toJSON);
+  return fetch(_config.API_URL + '/albums/' + id, _config.HEADERS).then(_utils.toJSON);
 };
 
 var getAlbums = exports.getAlbums = function getAlbums(id) {
-  return fetch(_config.API_URL + '/albums/?ids=' + id).then(_utils.toJSON);
+  return fetch(_config.API_URL + '/albums/?ids=' + id, _config.HEADERS).then(_utils.toJSON);
 };
 
 var getAlbumTracks = exports.getAlbumTracks = function getAlbumTracks(id) {
-  return fetch(_config.API_URL + '/albums/' + id + '/tracks').then(_utils.toJSON);
+  return fetch(_config.API_URL + '/albums/' + id + '/tracks', _config.HEADERS).then(_utils.toJSON);
 };
 
 /***/ }),
@@ -147,12 +155,13 @@ var _config = __webpack_require__(0);
 var _utils = __webpack_require__(1);
 
 var search = exports.search = function search(query, type) {
-  return fetch(_config.API_URL + '/search?q=' + query + '&type=' + type).then(_utils.toJSON);
+  return fetch(_config.API_URL + '/search?q=' + query + '&type=' + type, _config.HEADERS).then(_utils.toJSON);
 };
 
 var searchAlbums = exports.searchAlbums = function searchAlbums(query) {
-  search(query, 'album');
+  return search(query, 'album');
 };
+
 var searchArtists = exports.searchArtists = function searchArtists(query) {
   return search(query, 'artist');
 };
